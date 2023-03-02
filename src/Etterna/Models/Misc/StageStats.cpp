@@ -19,7 +19,7 @@
 #include "Etterna/Singletons/GameManager.h"
 #include "Etterna/Models/NoteData/NoteDataUtil.h"
 
-#ifndef _WIN32
+#if !defined(_WIN32) && (defined(__x86_64__) || defined(__i386__))
 #include <cpuid.h>
 #endif
 
