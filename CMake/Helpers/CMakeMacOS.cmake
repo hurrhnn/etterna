@@ -4,7 +4,9 @@
 list(APPEND cdefs _XOPEN_SOURCE CPU_X86_64 GL_SILENCE_DEPRECATION)
 set_target_properties(Etterna PROPERTIES COMPILE_DEFINITIONS "${cdefs}")
 set_target_properties(Etterna PROPERTIES MACOSX_BUNDLE TRUE)
-set(CMAKE_EXE_LINKER_FLAGS "-pagezero_size 10000 -image_base 100000000")
+if(NOT ${CMAKE_SYSTEM_PROCESSOR} MATCHES "arm")
+	set(CMAKE_EXE_LINKER_FLAGS "-pagezero_size 10000 -image_base 100000000")
+endif()
 set(CMAKE_XCODE_ATTRIBUTE_CLANG_CXX_LIBRARY "libc++")
 
 # Set AppBundle icon

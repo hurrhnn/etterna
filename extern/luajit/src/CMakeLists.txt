@@ -547,7 +547,7 @@ target_compile_options(libluajit PRIVATE ${LJ_COMPILE_OPTIONS})
 # Build the luajit binary
 add_executable(luajit luajit.c)
 target_link_libraries(luajit libluajit)
-if (APPLE AND LJ_64 AND NOT LUAJIT_ENABLE_GC64)
+if (APPLE AND LJ_64 AND NOT LUAJIT_ENABLE_GC64 AND NOT ${CMAKE_SYSTEM_PROCESSOR} MATCHES "arm")
   target_link_libraries(luajit "-pagezero_size 10000" "-image_base 100000000")
 endif()
 if ("${CMAKE_SYSTEM_NAME}" MATCHES "(Open|Free|Net)BSD")
