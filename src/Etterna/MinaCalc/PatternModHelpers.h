@@ -3,7 +3,11 @@
 #include <array>
 #include <vector>
 #include <algorithm>
+#if defined(__x86_64__) || defined(__i386__)
 #include <xmmintrin.h>
+#elif defined(__arm__) || defined(__aarch64__)
+#include "sse2neon.h"
+#endif
 #include <numeric>
 
 /* generic pattern mod functions and defs to help either agnostic or dependent
