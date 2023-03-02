@@ -31,10 +31,15 @@ if (UNIX)
 endif()
 
 if(APPLE)
-  list(APPEND FFMPEG_CONFIGURE
-    "--arch=x86_64"
-    "--cc=clang -arch x86_64"
-    "--enable-sse")
+  if(${CMAKE_SYSTEM_PROCESSOR} MATCHES "arm")
+    list(APPEND FFMPEG_CONFIGURE
+      "--enable-neon")
+  else()
+    list(APPEND FFMPEG_CONFIGURE
+	 "--arch=x86_64"
+     "--cc=clang -arch x86_64"
+     "--enable-sse")
+  endif()
 endif()
 list(APPEND FFMPEG_CONFIGURE "--enable-gpl")
 list(APPEND FFMPEG_CONFIGURE "--extra-cflags=-mmacosx-version-min=10.8 -w")
